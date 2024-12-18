@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo de Productos{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Catálogo de Productos</h1>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('producto.registrar') }}" class="btn btn-gray comic-sans-text">Registrar Producto</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="comic-sans-text">Nombre</th>
+                <th class="comic-sans-text">Precio</th>
+                <th class="comic-sans-text">Stock</th>
+                <th class="comic-sans-text">Disponibilidad</th>
+                <th class="comic-sans-text">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in productos %}
+            <tr>
+                <td class="comic-sans-text">{{ item.nombre }}</td>
+                <td class="comic-sans-text">{{ item.precio }}</td>
+                <td class="comic-sans-text">{{ item.stock }}</td>
+                <td class="comic-sans-text">{{ "Disponible" if item.stock > 0 else "No Disponible" }}</td>
+
+                <td class="comic-sans-text">
+                    <a href="{{ url_for('producto.editar', id_pro=item.id_pro) }}" class="btn btn-blue comic-sans-text">Editar</a>
+                    {% if session.get('empleado_cargo') == 'Administrador' %}
+                    <a href="{{ url_for('producto.delete', id_pro=item.id_pro)}}" class="btn btn-danger comic-sans-text">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

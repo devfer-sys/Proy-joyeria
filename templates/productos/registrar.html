@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Producto{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Registrar Producto</h1>
+
+    <form action="{{ url_for('producto.registrar') }}" method="POST">
+
+        <div class="form-group" class="comic-sans-text">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="precio" class="comic-sans-text">Precio</label>
+            <input type="number" class="form-control" name="precio" required>
+        </div>
+        <div class="form-group">
+            <label for="stock" class="comic-sans-text">Stock</label>
+            <input type="number" class="form-control" name="stock" required>
+        </div>
+
+        <button type="submit" class="btn btn-blue comic-sans-text">Guardar Producto</button>
+        <a href="{{ url_for('producto.index') }}" class="btn btn-danger comic-sans-text">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

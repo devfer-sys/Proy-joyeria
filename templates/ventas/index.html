@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Ventas{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Historial de Ventas</h1>
+    {% if ventas|length > 0 %}
+    
+    <div class="action-buttons">
+        <h4 class="text-right comic-sans-text">Ver por</h4>
+        <a href="{{ url_for('venta.index') }}" class="btn btn-info comic-sans-text">Todo</a>
+        <a href="{{ url_for('venta.reembolsos') }}" class="btn btn-info comic-sans-text">Ventas con Reembolso</a>
+        <a href="{{ url_for('venta.exitoso') }}" class="btn btn-info comic-sans-text">Ventas Exitosas</a> <!-- Nueva opción -->
+        <a href="{{ url_for('venta.precio_alto') }}" class="btn btn-info comic-sans-text">Precio Más Alto</a>
+        <a href="{{ url_for('venta.cantidad_alta') }}" class="btn btn-info comic-sans-text">Cantidad Más Alta</a>
+        <a href="{{ url_for('venta.ingresos_altos') }}" class="btn btn-info comic-sans-text">Ingresos Más Altos</a>
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="comic-sans-text">Nro. Venta</th>
+                <th class="comic-sans-text">Proceso</th>
+                <th class="comic-sans-text">Producto</th>
+                <th class="comic-sans-text">Cliente</th>
+                <th class="comic-sans-text">Cantidad Vendida</th>
+                <th class="comic-sans-text">Precio</th>
+                <th class="comic-sans-text">Empleado</th>
+                <th class="comic-sans-text">Fecha</th>
+                <th class="comic-sans-text">Ingresos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+            <tr>
+                <td class="comic-sans-text">{{ venta.id_ven }}</td>
+                <td class="comic-sans-text">{{ "Reembolso" if venta.compra_id is none else "Exitoso" }}</td>
+                <td class="comic-sans-text">{{ venta.nombre_producto }}</td>
+                <td class="comic-sans-text">{{ venta.nombre_cliente }}</td>
+                <td class="comic-sans-text">{{ venta.cant_vend }}</td>
+                <td class="comic-sans-text">${{ venta.precio_producto }}</td>
+                <td class="comic-sans-text">{{ venta.nombre_empleado }}</td>
+                <td class="comic-sans-text">{{ venta.fecha_venta.strftime('%Y-%m-%d') }}</td>
+                <td class="comic-sans-text">${{ "0" if venta.compra_id is none else venta.ingresos }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <!-- Fila para mostrar el total de ingresos -->
+        <tfoot>
+            <tr>
+                <td colspan="8" class="text-right comic-sans-text"><strong>Ingreso Total</strong></td>
+                <td class="comic-sans-text"><strong>${{ total_ingresos }}</strong></td>
+            </tr>
+        </tfoot>
+        
+    </table>
+    <br>
+    <div class="action-buttons"> 
+        <h4 class="text-right comic-sans-text">Generar Reporte</h4>
+        <a href="{{ url_for('venta.reporte_pdf', id_ven=ventas[0].id_ven) }}" class="btn btn-warning comic-sans-text">General</a>
+        <a href="{{ url_for('venta.reporte_pdf', filtro='reembolsos') }}" class="btn btn-warning comic-sans-text">Reembolsos</a>
+        <a href="{{ url_for('venta.reporte_pdf', filtro='exitoso') }}" class="btn btn-warning comic-sans-text">Ventas Exitosas</a>
+        <a href="{{ url_for('venta.reporte_pdf', filtro='precio_alto') }}" class="btn btn-warning comic-sans-text">Precio Más Alto</a>
+        <a href="{{ url_for('venta.reporte_pdf', filtro='cantidad_alta') }}" class="btn btn-warning comic-sans-text">Cantidad Más Alta</a>
+        <a href="{{ url_for('venta.reporte_pdf', filtro='ingresos_altos') }}" class="btn btn-warning comic-sans-text">Ingresos Más Altos</a>
+    </div>
+    {% else %}
+        <p class="text-right comic-sans-text">Debe registrar una compra.</p>
+    {% endif %}
+    
+    
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de Clientes{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Registro de Clientes</h1>
+    
+    <div class="action-buttons">
+        <a href="{{ url_for('cliente.registrar') }}" class="btn btn-gray comic-sans-text">Registrar Cliente</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="comic-sans-text">Nombre</th>
+                <th class="comic-sans-text">Correo Electrónico</th>
+                <th class="comic-sans-text">Teléfono</th>
+                <th class="comic-sans-text">Estado</th>
+                <th class="comic-sans-text">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in clientes %}
+            <tr>
+                <td class="comic-sans-text">{{ item.nombre_completo }}</td>
+                <td class="comic-sans-text">{{ item.email }}</td>
+                <td class="comic-sans-text">{{ item.telefono }}</td>
+                <td class="comic-sans-text">{{ item.estado }}</td>
+                
+                <td class="comic-sans-text">
+                    <a href="{{ url_for('cliente.editar', id_cli=item.id_cli)}}" class="btn btn-blue comic-sans-text">Editar</a>
+                    {% if session.get('empleado_cargo') == 'Administrador' %}
+                    <a href="{{ url_for('cliente.delete', id_cli=item.id_cli)}}" class="btn btn-danger comic-sans-text">Eliminar</a>
+                    {% endif %}
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

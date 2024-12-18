@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Registro de empleados{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Editar empleado</h1>
+    
+    <form action="{{ url_for('empleado.editar', id_emp=empleado.id_emp) }}" method="POST">
+        <div class="form-group">
+            <label for="nombre" class="comic-sans-text">Nombre</label>
+            <input type="text" class="form-control" name="nombre" value="{{empleado.nombre}}" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="apellidos" class="comic-sans-text">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" value="{{empleado.apellidos}}" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="cargo" class="comic-sans-text">Cargo</label>
+            <input type="text" class="form-control" name="cargo" value="{{empleado.cargo}}" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="contrasena" class="comic-sans-text">Contraseña</label>
+            <input type="text" class="form-control" name="contrasena" value="{{empleado.contrasena}}" required>
+
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="comic-sans-text">Estado</label>
+            <select class="form-control" name="estado" required>
+                <option value="Activo" {% if empleado.estado == 'Activo' %}selected{% endif %}>Activo</option>
+                <option value="No Activo" {% if empleado.estado == 'No Activo' %}selected{% endif %}>No Activo</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-blue comic-sans-text">Guardar empleado</button>
+        <a href="{{ url_for('empleado.index') }}" class="btn btn-danger comic-sans-text">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

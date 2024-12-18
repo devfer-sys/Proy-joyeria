@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar empleado{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Registrar empleado</h1>
+    
+    <form action="{{ url_for('empleado.registrar') }}" method="POST">
+        
+        <div class="form-group">
+            <label for="nombre" class="comic-sans-text">Nombre</label>
+            <input type="text" class="form-control" name="nombre" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="apellidos" class="comic-sans-text">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="cargo" class="comic-sans-text">Cargo</label>
+            <input type="text" class="form-control" name="cargo" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="contrasena" class="comic-sans-text">Contraseña</label>
+            <input type="text" class="form-control" name="contrasena" required>
+
+        </div>
+        
+        <button type="submit" class="btn btn-blue comic-sans-text">Guardar empleado</button>
+        <a href="{{ url_for('empleado.index') }}" class="btn btn-danger comic-sans-text">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
+
+
+
+

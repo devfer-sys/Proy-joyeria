@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Cliente{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Registrar Cliente</h1>
+    
+    <form action="{{ url_for('cliente.registrar') }}" method="POST">
+        
+        <div class="form-group">
+            <label for="nombre_completo" class="comic-sans-text">Nombre Completo</label>
+            <input type="text" class="form-control" name="nombre_completo" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="email" class="comic-sans-text">Correo Electrónico</label>
+            <input type="text" class="form-control" name="email" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="telefono" class="comic-sans-text">Teléfono</label>
+            <input type="text" class="form-control" name="telefono" required>
+        </div>
+        <button type="submit" class="btn btn-blue comic-sans-text">Guardar Cliente</button>
+        <a href="{{ url_for('cliente.index') }}" class="btn btn-danger comic-sans-text">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
+
+
+
+

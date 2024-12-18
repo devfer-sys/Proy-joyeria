@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Catalogo de Productos{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1 class="comic-sans-text">Editar Cliente</h1>
+    
+    <form action="{{ url_for('cliente.editar', id_cli=cliente.id_cli) }}" method="POST">
+        <div class="mb-3">
+            <label for="nombre_completo" class="comic-sans-text">Nombre Completo</label>
+            <input type="text" class="form-control" name="nombre_completo" value="{{cliente.nombre_completo}}" required>
+            
+        </div>
+        <div class="mb-3">
+            <label for="email" class="comic-sans-text">Correo Electrónico</label>
+            <input type="text" class="form-control" name="email" value="{{cliente.email}}" required>
+            
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="comic-sans-text">Estado</label>
+            <select class="form-control" name="estado" required>
+                <option value="Activo" {% if cliente.estado == 'Activo' %}selected{% endif %}>Activo</option>
+                <option value="No Activo" {% if cliente.estado == 'No Activo' %}selected{% endif %}>No Activo</option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="telefono" class="comic-sans-text">Teléfono</label>
+            <input type="text" class="form-control" name="telefono" value="{{cliente.telefono}}" required>
+
+        </div>
+        
+        <button type="submit" class="btn btn-blue comic-sans-text">Guardar Cliente</button>
+        <a href="{{ url_for('cliente.index') }}" class="btn btn-danger comic-sans-text">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
