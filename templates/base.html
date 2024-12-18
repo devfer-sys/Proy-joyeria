@@ -29,7 +29,7 @@
                 <span class="admin-button comic-sans-text">{{ session.get('empleado_nombre', 'Usuario') }}</span>
                 <a href="{{ url_for('empleado.logout') }}" class="nav-item comic-sans-text">Cerrar Sesión</a>
             {% else %}
-            <a href="{{ url_for('empleado.login') }}" class="nav-item">Iniciar Sesión</a>
+            <a href="{{ url_for('empleado.login') }}" class="nav-item comic-sans-text">Iniciar Sesión</a>
 
             {% endif %}
         </div>
