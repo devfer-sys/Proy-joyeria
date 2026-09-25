@@ -16,8 +16,8 @@
             {% if session.get('empleado_id') %}
                 <a href="/clientes/" class="nav-item comic-sans-text">CLIENTES</a>
                 <a href="/productos/" class="nav-item comic-sans-text">PRODUCTOS</a>
-                <a href="/ventas/" class="nav-item comic-sans-text">VENTAS</a>
-                <a href="/compras/" class="nav-item comic-sans-text">COMPRAS</a>
+                <a href="/ventas/" class="nav-item comic-sans-text">HISTORIAL</a>
+                <a href="/compras/" class="nav-item comic-sans-text">VENTAS</a>
                 
                 {% if session.get('empleado_cargo') == 'Administrador' %}
                 <a href="{{ url_for('empleado.index') }}" class="nav-item comic-sans-text">EMPLEADOS</a>
